@@ -3,7 +3,7 @@
 - Create `.env`: Copy `.env.template` to `.env`
 - Update `.env`: Fill in necessary environment variables
 
-### Running the Project
+### Running the Link
 
 - Development Mode: `pnpm run start`
 - Building: `pnpm run build`
