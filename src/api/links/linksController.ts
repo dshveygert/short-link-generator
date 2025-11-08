@@ -1,6 +1,7 @@
 import {handleServiceResponse} from "@/common/utils/httpHandlers";
 import type {Request, RequestHandler, Response} from "express";
 import {linksService} from "@/api/links/linksService";
+import {devLog} from "@/common/utils/devLog";
 
 class LinksController {
 
@@ -9,6 +10,7 @@ class LinksController {
         const serviceResponse = await linksService.createLink({
             linkUUID, linkName, domain
         });
+        devLog("service response :", serviceResponse);
         return handleServiceResponse(serviceResponse, res);
     };
 

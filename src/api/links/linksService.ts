@@ -17,7 +17,7 @@ export class LinksService {
     > {
         try {
             const link = await this.linksRepository.createLink(params);
-            console.log("Service links", link);
+
             if (link) {
                 const {uuid, domain, slug, createdAt} = link;
                 return ServiceResponse.success<LinkResponse>("New Link", {

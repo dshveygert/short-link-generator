@@ -13,6 +13,7 @@ export const linksRouter: Router = express.Router();
 
 linksRegistry.register("Link", LinkSchema);
 
+// Get link data by slug
 linksRegistry.registerPath({
     method: "get",
     path: "/links/slug/:slug",
@@ -22,6 +23,7 @@ linksRegistry.registerPath({
 
 linksRouter.get("/slug/:slug", authMiddleware, validateRequest(LinkRequestBySlugSchema), linksController.getLinkBySlug);
 
+// Get link data by uuid
 linksRegistry.registerPath({
     method: "get",
     path: "/links/:linkUUID",
@@ -31,6 +33,7 @@ linksRegistry.registerPath({
 
 linksRouter.get("/:linkUUID", authMiddleware, validateRequest(LinkRequestByUUIDSchema), linksController.getLinkByUUID);
 
+// Create a link
 linksRegistry.registerPath({
     method: "post",
     path: "/links",
