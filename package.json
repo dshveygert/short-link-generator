@@ -5,7 +5,7 @@
   "author": "dshveygert",
   "license": "MIT",
   "type": "module",
-  "main": "\"index.ts",
+  "main": "index.ts",
   "private": true,
   "scripts": {
     "dev": "tsx watch --clear-screen=false src/index.ts | pino-pretty",
