@@ -4,7 +4,6 @@
   "description": "Short link generation service (maps UUIDs to human-readable slugs).",
   "author": "dshveygert",
   "license": "MIT",
-  "type": "module",
   "main": "index.ts",
   "private": true,
   "scripts": {
