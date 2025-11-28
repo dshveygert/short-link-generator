@@ -1,16 +1,18 @@
 import {handleServiceResponse} from "@/common/utils/httpHandlers";
 import type {Request, RequestHandler, Response} from "express";
 import {linksService} from "@/api/links/linksService";
-import {devLog} from "@/common/utils/devLog";
+import {devLog, prodLog} from "@/common/utils/devLog";
 
 class LinksController {
 
     public createLink: RequestHandler = async (req: Request, res: Response) => {
         const {linkUUID, linkName, domain} = req.body;
+        prodLog('--createLink', linkUUID, linkName, domain);
         const serviceResponse = await linksService.createLink({
             linkUUID, linkName, domain
         });
         devLog("service response :", serviceResponse);
+        prodLog("service response :", serviceResponse);
         return handleServiceResponse(serviceResponse, res);
     };
 

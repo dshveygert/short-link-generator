@@ -6,6 +6,7 @@ import { env } from "@/common/utils/envConfig";
  */
 
 const isDev = env.NODE_ENV === "development";
+const isProd = env.NODE_ENV === "production";
 
 export const devLog = (...args: any[]) => {
     if (isDev) {
@@ -28,5 +29,13 @@ export const devError = (...args: any[]) => {
         const timestamp = new Date().toISOString();
         // eslint-disable-next-line no-console
         console.error(`[DEV ERROR] ${timestamp}:`, ...args);
+    }
+};
+
+export const prodLog = (...args: any[]) => {
+    if (isProd) {
+        const timestamp = new Date().toISOString();
+        // eslint-disable-next-line no-console
+        console.log(`[PROD LOG] ${timestamp}:`, ...args);
     }
 };
