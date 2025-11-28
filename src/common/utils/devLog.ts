@@ -1,4 +1,5 @@
 import { env } from "@/common/utils/envConfig";
+import {logger} from "@/server";
 
 /**
  * Development logger that works based on env.NODE_ENV
@@ -32,10 +33,12 @@ export const devError = (...args: any[]) => {
     }
 };
 
-export const prodLog = (...args: any[]) => {
+export const prodLog = (dataObject: {[key: string | number | symbol]: unknown}) => {
     if (isProd) {
         const timestamp = new Date().toISOString();
-        // eslint-disable-next-line no-console
-        console.log(`[PROD LOG] ${timestamp}:`, ...args);
+        logger.debug({
+            name: `[PROD LOG] ${dataObject?.name ? dataObject.name : ''} ${timestamp}`,
+            ...dataObject
+        });
     }
 };

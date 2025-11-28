@@ -7,12 +7,13 @@ class LinksController {
 
     public createLink: RequestHandler = async (req: Request, res: Response) => {
         const {linkUUID, linkName, domain} = req.body;
-        prodLog('--createLink', linkUUID, linkName, domain);
+        prodLog({name: 'createLink', domain, linkUUID, linkName});
+
         const serviceResponse = await linksService.createLink({
             linkUUID, linkName, domain
         });
         devLog("service response :", serviceResponse);
-        prodLog("service response :", serviceResponse);
+        prodLog({name: 'createLink service response :', serviceResponse});
         return handleServiceResponse(serviceResponse, res);
     };
 
