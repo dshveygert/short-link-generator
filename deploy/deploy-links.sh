@@ -103,6 +103,19 @@ else
     exit 1
 fi
 
+echo ">>> Setting NODE_ENV for envalid..."
+
+if [ -f "dist/index.js" ]; then
+    MAIN_FILE="dist/index.js"
+else
+    echo "❌ Main (dist/index.js) file not found"
+    exit 1
+fi
+
+sed -i '1i process.env.NODE_ENV = "production";' "$MAIN_FILE"
+
+echo "✅ NODE_ENV forced to production"
+
 # ==============================================================================
 # STEP 7: Update symlink
 # ==============================================================================
