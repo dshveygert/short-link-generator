@@ -12,7 +12,7 @@ RELEASES_BASE="/var/arny/releases"
 WWW_BASE="/var/www"
 CONFIG_DIR="/var/arny/configs/short-link-generator"
 
-KEEP_RELEASES=3
+KEEP_RELEASES=1
 
 # Проверяем что pnpm установлен
 if ! command -v pnpm &> /dev/null; then
