@@ -2,6 +2,7 @@ import slugify from "slugify";
 import {DBLink, Link, LinkResponse} from "@/api/links/linksModel";
 import {env} from "@/common/utils/envConfig";
 import {nanoid} from "nanoid";
+import {prodLog} from "@/common/utils/devLog";
 
 
 export class LinksRepository {
@@ -19,7 +20,7 @@ export class LinksRepository {
     if (existedLink?.id) {
       return existedLink;
     }
-    const domainName = domain || APP_CONFIG_DOMAIN || "";
+    const domainName = domain ?? APP_CONFIG_DOMAIN ?? "";
     const dateSuffix = new Date().toISOString().slice(2, 10);
     let ln = !!domainName ? `${domainName[0]}${domainName[domainName.length -1]}` : dateSuffix;
     if (!!linkName) {
@@ -40,7 +41,7 @@ export class LinksRepository {
         domain
       })
     }
-
+    prodLog({domain, APP_CONFIG_DOMAIN, domainName});
     const link = await DBLink.query().insertAndFetch({
       uuid: linkUUID,
       slug,

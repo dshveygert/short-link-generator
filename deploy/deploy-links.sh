@@ -124,32 +124,20 @@ mkdir -p "$(dirname "$CURRENT_LINK")"
 ln -sfn "$RELEASE_DIR" "$CURRENT_LINK"
 
 # ==============================================================================
-# STEP 8: Restart/start PM2 - УЛУЧШЕННЫЙ ЗАПУСК
+# STEP 8: Restart/start PM2
 # ==============================================================================
 echo ">>> Managing PM2 process..."
 
-# Определяем точку входа для запуска
-if [ -f "$CURRENT_LINK/dist/index.js" ]; then
-    START_COMMAND="node dist/index.js"
-elif [ -f "$CURRENT_LINK/src/index.js" ]; then
-    START_COMMAND="node src/index.js"
-elif [ -f "$CURRENT_LINK/index.js" ]; then
-    START_COMMAND="node index.js"
-else
-    echo "❌ ERROR: No entry point found for PM2"
-    exit 1
-fi
-
-echo "📝 Using start command: $START_COMMAND"
-
-if pm2 id "$APP_NAME" > /dev/null 2>&1; then
+# Используем простой PM2 config без env_file
+if pm2 list | grep -q "$APP_NAME"; then
     echo "🔄 Restarting PM2 process: $APP_NAME"
-    pm2 delete "$APP_NAME"
+    pm2 restart "$APP_NAME" --update-env
+else
+    echo "🆕 Starting PM2 process: $APP_NAME"
+    cd "$CURRENT_LINK"
+    pm2 start "pnpm start" --name "$APP_NAME" --cwd "$CURRENT_LINK"
 fi
 
-echo "🆕 Starting PM2 process: $APP_NAME"
-cd "$CURRENT_LINK"
-pm2 start "$START_COMMAND" --name "$APP_NAME" --cwd "$CURRENT_LINK"
 pm2 save
 
 # ==============================================================================
