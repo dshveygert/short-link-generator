@@ -17,5 +17,5 @@ export const env = cleanEnv(process.env, {
   POSTGRES_USER: str({ devDefault: testOnly("USER") }),
   POSTGRES_PASSWORD: str({ devDefault: testOnly("PASSWORD") }),
   POSTGRES_DB: str({ devDefault: testOnly("DB") }),
-  APP_CONFIG_DOMAIN: str({ devDefault: testOnly("localhost") }),
+  APP_CONFIG_DOMAIN: str({ devDefault: testOnly("") }),
 });
