@@ -1,6 +1,6 @@
 {
   "name": "short-link-generator",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Short link generation service (maps UUIDs to human-readable slugs).",
   "author": "dshveygert",
   "license": "MIT",
